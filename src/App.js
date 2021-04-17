@@ -3,13 +3,20 @@ import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from './pages';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  return (
-    <div>
-      <Dashboard></Dashboard>
-      <Login />
-      <Error />
-    </div>
-  );
+	return (
+		<AuthWrapper>
+			<Router>
+				<Switch>
+					{/*Swtich renders the 1st child that matches*/}
+					<PrivateRoute exact path="/">
+						<Dashboard />
+					</PrivateRoute>
+					<Route path="/login" component={Login} />
+					<Route path="*" component={Error} />
+				</Switch>
+			</Router>
+		</AuthWrapper>
+	);
 }
 
 export default App;
